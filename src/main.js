@@ -5,6 +5,7 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import getImages from './js/pixabay-api.js';
 import { imagesTamplate } from './js/render-functions.js';
+import axios from 'axios';
 
 const refs = {
   formEl: document.querySelector('.form-request'),
