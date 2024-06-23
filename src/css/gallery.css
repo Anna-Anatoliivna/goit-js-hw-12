@@ -1,0 +1,59 @@
+.form-request {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+.gallery {
+  padding: 0px;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+}
+.gallery-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.gallery-image {
+  display: block;
+  width: 360px;
+  height: 200px;
+  transform: scale(1);
+  transition: transform 0.5s;
+}
+.card-info {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.card-info-list {
+  display: flex;
+  gap: 28px;
+  flex-direction: row;
+}
+.card-title {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.33;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+}
+.card-text {
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 2;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+}
