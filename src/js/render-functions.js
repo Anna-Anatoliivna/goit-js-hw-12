@@ -1,3 +1,6 @@
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
 export function imageTamplate(image) {
   return `<li class="gallery-item">
         <a class="gallery-link" href=${image.largeImageURL}>
@@ -28,4 +31,13 @@ export function imageTamplate(image) {
 
 export function imagesTamplate(arr) {
   return arr.map(imageTamplate).join('');
+}
+
+export function renderMarkup(array, container) {
+  const markup = imagesTamplate(array);
+  container.insertAdjacentHTML('beforeend', markup);
+  const lightbox = new SimpleLightbox('.gallery a', {
+    captionDelay: 250,
+  });
+  lightbox.refresh();
 }

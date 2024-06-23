@@ -1,6 +1,10 @@
-export default function getImages(url) {
-  return fetch(url).then(res => {
-    if (!res.ok) throw new Error(res.status);
-    return res.json();
-  });
+import axios from 'axios';
+
+export default async function fetchData(params) {
+  try {
+    const res = await axios.get('https://pixabay.com/api/?' + params);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
 }

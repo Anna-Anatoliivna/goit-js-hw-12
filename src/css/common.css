@@ -43,15 +43,22 @@
   background: #4e75ff;
   color: #fff;
   outline: transparent;
+  letter-spacing: 0.04em;
   transition: background-color 250ms ease;
   font-family: Montserrat, sans-serif;
   font-size: 16px;
   font-weight: 500;
-  width: 91px;
-  height: 40px;
+  min-width: 91px;
+  line-height: 1.5;
+  /* height: 40px; */
 }
 
 .btn:hover,
 .btn:focus {
   background: #6c8cff;
+}
+.btn-load-more {
+  display: block;
+  margin: auto;
+  /* margin-top: 32px; */
 }

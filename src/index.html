@@ -14,13 +14,14 @@
     <div class="container">
       <form class="form-request">
         <input class="input" name="query" type="text" placeholder="Search images...">
-        <button class="btn" type="submit">Submit</button>
+        <button class="btn" data-action="submit" type="submit">Submit</button>
       </form>
-      <div class="loader js-hidden"></div>
 
       <ul class="gallery">
         <!-- js gallery -->
       </ul>
+      <div class="loader js-hidden"></div>
+      <button class="btn btn-load-more js-hidden" data-action="load-more" type="button">Load more</button>
     </div>
   </section>
   <script src="./main.js" type="module"></script>
