@@ -11,6 +11,7 @@ const refs = {
   ulElem: document.querySelector('.gallery'),
   loader: document.querySelector('.loader'),
   btnLoad: document.querySelector('button[data-action=load-more]'),
+  // liElem: document.querySelector('.gallery-item'),
 };
 const errors = {
   emptyHits: "We're sorry, but you've reached the end of search results",
@@ -46,15 +47,11 @@ refs.formEl.addEventListener('submit', async e => {
   let currentPage = params.get('page');
   try {
     const data = await fetchData(params);
-    console.log(data);
-    console.log(data.totalHits, params.get('per_page'));
-    console.log(currentPage);
-    console.log(Math.ceil(data.totalHits / params.get('per_page')));
     const limit = Math.ceil(data.totalHits / params.get('per_page'));
     if (currentPage < limit) {
-      // throw new Error('no more pages');
       loadMore.add(refs.btnLoad);
     } else {
+      // throw new Error('no more pages');
       loadMore.del(refs.btnLoad);
     }
     if (!data.hits.length) throw new Error('data.hits.length is empty!');
@@ -79,18 +76,20 @@ refs.btnLoad.addEventListener('click', async e => {
   params.set('page', ++currentPage);
   try {
     const data = await fetchData(params);
-    console.log(data);
-    console.log(data.totalHits, params.get('per_page'));
-    console.log(currentPage);
-    console.log(Math.ceil(data.totalHits / params.get('per_page')));
+    // console.log(data);
+    // console.log(data.totalHits, params.get('per_page'));
+    // console.log(currentPage);
+    // console.log(Math.ceil(data.totalHits / params.get('per_page')));
     const limit = Math.ceil(data.totalHits / params.get('per_page'));
     if (currentPage > limit) {
       throw new Error('no more pages');
     }
     if (!data.hits.length) throw new Error('data.hits.length is empty!');
     renderMarkup(data.hits, refs.ulElem);
+    // myScroll();
   } catch (error) {
     console.log(error);
+    loadMore.del(refs.btnLoad);
     iziToast.error({
       position: `topRight`,
       title: `error`,
@@ -99,3 +98,14 @@ refs.btnLoad.addEventListener('click', async e => {
   }
   loader.delLoader(refs.loader);
 });
+
+function myScroll() {
+  const liElem = refs.articleListElem.children[0];
+  console.log(liElem);
+  const height = liElem.getBoundingClientRect().height;
+  console.log(height);
+  scrollBy({
+    top: height * 2,
+    behavior: 'smooth',
+  });
+}
