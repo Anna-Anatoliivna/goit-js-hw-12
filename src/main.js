@@ -51,8 +51,8 @@ refs.formEl.addEventListener('submit', async e => {
     if (currentPage < limit) {
       loadMore.add(refs.btnLoad);
     } else {
-      // throw new Error('no more pages');
       loadMore.del(refs.btnLoad);
+      throw new Error('no more pages');
     }
     if (!data.hits.length) throw new Error('data.hits.length is empty!');
     refs.ulElem.innerHTML = '';
@@ -86,7 +86,7 @@ refs.btnLoad.addEventListener('click', async e => {
     }
     if (!data.hits.length) throw new Error('data.hits.length is empty!');
     renderMarkup(data.hits, refs.ulElem);
-    // myScroll();
+    myScroll();
   } catch (error) {
     console.log(error);
     loadMore.del(refs.btnLoad);
@@ -100,10 +100,8 @@ refs.btnLoad.addEventListener('click', async e => {
 });
 
 function myScroll() {
-  const liElem = refs.articleListElem.children[0];
-  console.log(liElem);
+  const liElem = refs.ulElem.children[0];
   const height = liElem.getBoundingClientRect().height;
-  console.log(height);
   scrollBy({
     top: height * 2,
     behavior: 'smooth',
