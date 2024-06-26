@@ -11,7 +11,6 @@ const refs = {
   ulElem: document.querySelector('.gallery'),
   loader: document.querySelector('.loader'),
   btnLoad: document.querySelector('button[data-action=load-more]'),
-  // liElem: document.querySelector('.gallery-item'),
 };
 const errors = {
   emptyHits: "We're sorry, but you've reached the end of search results",
@@ -52,23 +51,29 @@ refs.formEl.addEventListener('submit', async e => {
       loadMore.add(refs.btnLoad);
     } else {
       loadMore.del(refs.btnLoad);
-      throw new Error('no more pages');
+      iziToast.error({
+        position: `topRight`,
+        title: `error`,
+        message: errors.emptyHits,
+      });
     }
+
     if (!data.hits.length) throw new Error('data.hits.length is empty!');
     refs.ulElem.innerHTML = '';
     renderMarkup(data.hits, refs.ulElem);
   } catch (error) {
     console.log(error);
-    refs.ulElem.innerHTML = '';
     iziToast.error({
       position: `topRight`,
       title: `error`,
       message: errors.invalidRequest,
     });
+    refs.ulElem.innerHTML = '';
   }
   loader.delLoader(refs.loader);
   refs.formEl.reset();
 });
+
 refs.btnLoad.addEventListener('click', async e => {
   e.preventDefault();
   loader.addLoader(refs.loader);
@@ -81,20 +86,19 @@ refs.btnLoad.addEventListener('click', async e => {
     // console.log(currentPage);
     // console.log(Math.ceil(data.totalHits / params.get('per_page')));
     const limit = Math.ceil(data.totalHits / params.get('per_page'));
-    if (currentPage > limit) {
-      throw new Error('no more pages');
+    if (currentPage >= limit) {
+      loadMore.del(refs.btnLoad);
+      iziToast.error({
+        position: `topRight`,
+        title: `error`,
+        message: errors.emptyHits,
+      });
     }
     if (!data.hits.length) throw new Error('data.hits.length is empty!');
     renderMarkup(data.hits, refs.ulElem);
     myScroll();
   } catch (error) {
     console.log(error);
-    loadMore.del(refs.btnLoad);
-    iziToast.error({
-      position: `topRight`,
-      title: `error`,
-      message: errors.emptyHits,
-    });
   }
   loader.delLoader(refs.loader);
 });
