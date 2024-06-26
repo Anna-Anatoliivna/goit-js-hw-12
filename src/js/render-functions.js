@@ -33,11 +33,15 @@ export function imagesTamplate(arr) {
   return arr.map(imageTamplate).join('');
 }
 
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionDelay: 250,
+});
+
 export function renderMarkup(array, container) {
   const markup = imagesTamplate(array);
   container.insertAdjacentHTML('beforeend', markup);
-  const lightbox = new SimpleLightbox('.gallery a', {
-    captionDelay: 250,
-  });
+  // const lightbox = new SimpleLightbox('.gallery a', {
+  //   captionDelay: 250,
+  // });
   lightbox.refresh();
 }

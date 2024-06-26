@@ -9,7 +9,7 @@ const refs = {
   formEl: document.querySelector('.form-request'),
   btnEl: document.querySelector('button[data-action=submit]'),
   ulElem: document.querySelector('.gallery'),
-  loader: document.querySelector('.loader'),
+  loaderEl: document.querySelector('.loader'),
   btnLoad: document.querySelector('button[data-action=load-more]'),
 };
 const errors = {
@@ -40,7 +40,7 @@ refs.formEl.addEventListener('submit', async e => {
     });
     return;
   }
-  loader.addLoader(refs.loader);
+  loader.addLoader(refs.loaderEl);
   params.set('q', userText);
   params.set('page', 1);
   let currentPage = params.get('page');
@@ -70,13 +70,13 @@ refs.formEl.addEventListener('submit', async e => {
     });
     refs.ulElem.innerHTML = '';
   }
-  loader.delLoader(refs.loader);
+  loader.delLoader(refs.loaderEl);
   refs.formEl.reset();
 });
 
 refs.btnLoad.addEventListener('click', async e => {
   e.preventDefault();
-  loader.addLoader(refs.loader);
+  loader.addLoader(refs.loaderEl);
   let currentPage = params.get('page');
   params.set('page', ++currentPage);
   try {
@@ -100,7 +100,7 @@ refs.btnLoad.addEventListener('click', async e => {
   } catch (error) {
     console.log(error);
   }
-  loader.delLoader(refs.loader);
+  loader.delLoader(refs.loaderEl);
 });
 
 function myScroll() {
